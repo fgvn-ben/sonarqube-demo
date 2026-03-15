@@ -1,0 +1,16 @@
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/service/ProductService.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/bad/BadRulesDemo.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/bad/BadControllerDemo.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/controller/ProductController.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/exception/GlobalExceptionHandler.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/SonarqubeDemoApplication.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/exception/ErrorResponse.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/dto/ProductRequest.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/bad/BadResourceLeak.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/bad/BadUserService.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/bad/BadUtil.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/entity/Product.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/dto/ProductResponse.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/bad/BadReportController.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/repository/ProductRepository.java
+/Users/macx/Documents/Nhat/Study/SonarqubeDemo/src/main/java/com/demo/exception/ResourceNotFoundException.java

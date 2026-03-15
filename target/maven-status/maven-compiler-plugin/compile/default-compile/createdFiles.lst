@@ -1,0 +1,16 @@
+com/demo/dto/ProductResponse.class
+com/demo/bad/BadUserService.class
+com/demo/bad/BadResourceLeak.class
+com/demo/dto/ProductRequest.class
+com/demo/bad/BadControllerDemo.class
+com/demo/service/ProductService.class
+com/demo/repository/ProductRepository.class
+com/demo/exception/ErrorResponse.class
+com/demo/exception/ResourceNotFoundException.class
+com/demo/SonarqubeDemoApplication.class
+com/demo/controller/ProductController.class
+com/demo/entity/Product.class
+com/demo/bad/BadReportController.class
+com/demo/exception/GlobalExceptionHandler.class
+com/demo/bad/BadRulesDemo.class
+com/demo/bad/BadUtil.class
