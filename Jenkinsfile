@@ -45,7 +45,7 @@ pipeline {
 
     post {
         always {
-            cleanWs(deleteDirs: true, patterns: [[pattern: 'target/', type: 'INCLUDE']])
+            sh 'rm -rf target'
         }
         failure {
             echo 'Pipeline failed. Check logs.'
