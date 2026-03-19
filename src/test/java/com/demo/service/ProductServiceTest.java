@@ -131,6 +131,35 @@ class ProductServiceTest {
         assertThat(result.get(0).getPrice()).isEqualByComparingTo("75.00");
     }
 
+    @Test
+    void update_returnsResponse_whenFound() {
+        ProductRequest req = new ProductRequest("Updated Tablet", BigDecimal.valueOf(249.99), "New desc");
+        Product existing = product("Tablet", "199.99");
+        existing.setId(3L);
+        Product updated = product("Updated Tablet", "249.99");
+        updated.setId(3L);
+        when(productRepository.findById(3L)).thenReturn(Optional.of(existing));
+        when(productRepository.save(any(Product.class))).thenReturn(updated);
+
+        ProductResponse result = productService.update(3L, req);
+
+        assertThat(result.getId()).isEqualTo(3L);
+        assertThat(result.getName()).isEqualTo("Updated Tablet");
+        assertThat(result.getPrice()).isEqualByComparingTo("249.99");
+        verify(productRepository).save(any(Product.class));
+    }
+
+    @Test
+    void update_throws_whenNotFound() {
+        ProductRequest req = new ProductRequest("Product", BigDecimal.valueOf(99.99), null);
+        when(productRepository.findById(999L)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> productService.update(999L, req))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessageContaining("999");
+        verify(productRepository, never()).save(any());
+    }
+
     private static Product product(String name, String price) {
         Product p = new Product();
         p.setName(name);

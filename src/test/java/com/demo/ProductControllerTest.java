@@ -116,4 +116,45 @@ class ProductControllerTest {
                 .andExpect(jsonPath("$", hasSize(0)));
         verify(productService).findByPriceRange(BigDecimal.valueOf(10), BigDecimal.valueOf(100));
     }
+
+    @Test
+    void searchByPrice_returns400_whenInvalidRange() throws Exception {
+        when(productService.findByPriceRange(eq(BigDecimal.valueOf(100)), eq(BigDecimal.valueOf(10))))
+                .thenThrow(new IllegalArgumentException("Invalid price range: min must be <= max"));
+
+        mockMvc.perform(get("/api/products/search")
+                        .param("minPrice", "100")
+                        .param("maxPrice", "10"))
+                .andExpect(status().isBadRequest());
+        verify(productService).findByPriceRange(BigDecimal.valueOf(100), BigDecimal.valueOf(10));
+    }
+
+    @Test
+    void update_returns200AndBody_whenFound() throws Exception {
+        ProductRequest req = new ProductRequest("Updated Laptop", BigDecimal.valueOf(149.99), "Updated desc");
+        ProductResponse updated = new ProductResponse(1L, "Updated Laptop", BigDecimal.valueOf(149.99), "Updated desc", null);
+        when(productService.update(eq(1L), any(ProductRequest.class))).thenReturn(updated);
+
+        mockMvc.perform(put("/api/products/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(req)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("Updated Laptop"))
+                .andExpect(jsonPath("$.price").value(149.99));
+        verify(productService).update(eq(1L), any(ProductRequest.class));
+    }
+
+    @Test
+    void update_returns404_whenNotFound() throws Exception {
+        ProductRequest req = new ProductRequest("Product", BigDecimal.valueOf(99.99), null);
+        when(productService.update(eq(999L), any(ProductRequest.class)))
+                .thenThrow(new ResourceNotFoundException("Product", 999L));
+
+        mockMvc.perform(put("/api/products/999")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(req)))
+                .andExpect(status().isNotFound());
+        verify(productService).update(eq(999L), any(ProductRequest.class));
+    }
 }
