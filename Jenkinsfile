@@ -28,12 +28,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'mvn test -B'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                // verify sẽ chạy test + tạo báo cáo JaCoCo XML cho SonarQube
+                sh 'mvn verify -B'
             }
         }
 
@@ -42,7 +38,7 @@ pipeline {
                 // 'SonarQube' = tên SonarQube server đã cấu trong Jenkins (Manage Jenkins → System)
                 // Token cấu tại Credentials, gắn với server đó
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube-demo -B'
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube-demo -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml -B'
                 }
             }
         }
